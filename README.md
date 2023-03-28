@@ -73,3 +73,25 @@ The Hamming window is most commonly used in ASR, and can be created simply by ma
 Next, we will compute the Fourier transform of each windowed frame. The “direct” implementation of the DFT is:
 
 𝑁 𝑋[𝑚] = ∑𝑥[𝑛]𝑒 𝑛=0 𝑚 −2𝜋𝑗 𝑛 𝑁
+
+## Computing the Magnitute of the Power Spectra
+
+The magnitude spectrum is defined as:
+
+𝑋𝑚𝑎𝑔 [𝑚] = |𝑋 [𝑚]| = √Real(𝑋 [𝑚])2 + Imaginary(𝑋 [𝑚])2
+
+In Python, we can use numpy.abs() to compute the power spectra:
+
+𝑋𝑝𝑜𝑤 [𝑚] = 𝑋𝑚𝑎𝑔 [𝑚]2 
+
+## Mel-filterbank Application:
+
+We use a set of Mel-scale filterbanks to warp the frequency axis to better reflect human perception, as well as to lump nearby frequencies together and reduce the overall dimensionality of the spectrum. the Fourier transform of a signal contains both positive and negative frequencies, but for a real- valued signal such as ours, the magnitude spectrum will be symmetric. Therefore, when computing the Mel-filterbank energies, we are only use the positive frequencies, which live between 0 and 𝜋 along the digital frequency axis, corresponding to the first (𝑁 /2) + 1 elements of 𝑋 [𝑚]. Because we used 𝑁 = 512 when computing our DFT, our positive frequencies will appear in the first 257 elements of 𝑋 [𝑚], and the Mel-filters are sized accordingly.
+The energy contained within the 𝑖𝑡h filter is simply a weighted sum of the filter response 𝑚𝑒𝑙 times the power spectrum:
+
+        𝑚=257
+        
+𝑋𝑚𝑒𝑙[𝑘] = ∑ 𝑚𝑒𝑙𝑘[𝑚]𝑋𝑝𝑜𝑤[𝑚],𝑘 = 0,1,2,...,22
+
+        m=0
+

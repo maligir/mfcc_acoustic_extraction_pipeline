@@ -14,13 +14,21 @@ This is an implementation of the Mel-Frequency Cepstral Coefficient (MFCC) acous
 3. Pre-emphasis filtering
 4. Transforming the audio into a sequence of frames 5. For each frame:
 
-(a) Multiplying the frame with a window function (b) Computing the Fourier transform
+(a) Multiplying the frame with a window function 
 
-(c) Computing the magnitude spectrum from the Fourier transform (d) Computing the power spectrum from the magnitude spectrum (e) Binning the power spectrum with Mel filterbanks
+(b) Computing the Fourier transform
+
+(c) Computing the magnitude spectrum from the Fourier transform 
+
+(d) Computing the power spectrum from the magnitude spectrum 
+
+(e) Binning the power spectrum with Mel filterbanks
 
 (f) Taking the logarithm of the Mel-filterbank power spectrum
 
-(g) Computing Discrete Cosine Transform (DCT) of the log-Mel-power spectrum (h) Truncating the DCT to keep only the first 𝐶 elements
+(g) Computing Discrete Cosine Transform (DCT) of the log-Mel-power spectrum 
+
+(h) Truncating the DCT to keep only the first 𝐶 elements
 
 For an input audio waveform that occupies 𝐹 frames, the resulting MFCC representation of the audio will be a 𝐹 by 𝐶 matrix.
 
